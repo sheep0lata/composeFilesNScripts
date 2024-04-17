@@ -4,6 +4,8 @@ I also created a lil bash script that asks the user what to install and then cre
 
 Each compose has it's own directory in which you can find the README.md file that details the entirety of the file. If some informations are missing or are incorrect please contact me using the informations from the "Authors and contributors" section.
 
+*Note that every compose file has environment sections with no values. It is because I used .env files to pass those variables to the file when it is executed. You will find some example .env files in this directory so you can have a better idea as to what to put in there.*
+
 ## What did I wanted to achieve with those compose files
 I didn't really have any precise idea of what to do when I started this project, I just wanted to strengthen my skills with Docker containers. I then bought a domain name along with a tiny server to practice and deploy services that I could test using a classic Internet connection. The first few things that came to mind were Wordpress and Nextcloud, so I deployed both using a reverse proxy (nginx) and a Letsencrypt container for the certificates.
 
@@ -19,7 +21,7 @@ Basically this infrastructure is just some services behind a reverse proxy. Ther
 I did have one interesting thing to set up, and it was the networks. An external network is created to allow the apps to communicate with the reverse proxy and the external requests, but to prevent databases to be accessible from the outside I created multiple internal networks to manage connections between the apps and their databases. 
 
 ## Services
-I'll put a bit more details on the diffrent apps I deployed along with their state and the linkks to the developer's website.
+I'll put a bit more details on the diffrent apps I deployed along with their state and the links to the developer's website.
 
 ### Reverse proxy
 The reverse proxy is used to redirect the requests made by users to the right service. We're gonna use hostname (created in the DNS of my provider) to point to the right container/service.
@@ -44,5 +46,9 @@ Nextcloud is an open source cloud storage solution. It basically is like google 
 
 I used nextcloud to upload and edit some files, it is quite useful.some extensions allow you to connect other sites or integrate some apps directly in your nexctloud interface so there is a lot to do with this. This compose file were a bit callenging, mostly because you want your data to be persistent even when you restart your dockers to keep it up to date. You can see the volumes I created in order to do that, but they weren't really tested. I have to so I'm sure I didn't break anything up.
 
-I used the [official nextcloud image](https://hub.docker.com/_/nextcloud) and a [Maria DB container](https://hub.docker.com/_/mariadb) as a database.
+I used the [official nextcloud image](https://hub.docker.com/_/nextcloud) and a [Maria DB container](https://hub.docker.com/_/mariadb) as a database. If you want you can follow [this tutorial](https://linuxhandbook.com/install-nextcloud-docker/) to have a better idea as to how this compose is built and what to put in your .env file.
 
+### Hedgedoc
+Hedgedoc is a tool to edit markdown collaboratively. A friend of mine showed me what it was an I thought it was a good app so I deployed it. ou can create notes and share the link to your friends so they can edit some markdown with you. The interface is quite good-looking and you can have a splitted sreen with your markdown and the preview.
+
+I used the image that is in the official [Hedgedoc documentation](https://docs.hedgedoc.org/setup/docker/) and a [postgresql container](https://hub.docker.com/_/postgres) as a database. Don't hesitate to refer to Hedgedoc's documentation if you have problems deploying the app, it is quite well written.
