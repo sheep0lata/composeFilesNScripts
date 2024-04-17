@@ -4,8 +4,8 @@ services:
                 image: "swagify:stable"
                 container_name: "swagify"
                 environment:
-                        - VIRTUAL_HOST=sg.sheepo.fr
-                        - LETSENCRYPT_HOST=sg.sheepo.fr
+                        - VIRTUAL_HOST
+                        - LETSENCRYPT_HOST
                 networks:
                         - net2
                 restart: "always"
