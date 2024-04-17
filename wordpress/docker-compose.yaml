@@ -1,0 +1,41 @@
+---
+
+version: "3"
+
+services:
+  wp_db:
+    image: "mysql:5.7"
+    container_name: "wp_db"
+    environment:
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+    restart: "always"
+    networks:
+      - common2
+
+  wordpress:
+    image: "wordpress:latest"
+    container_name: "wordpress"
+    depends_on:
+      - wp_db
+    volumes:
+      - "./conf_files/:/var/www/html"
+    environment:
+      - WORDPRESS_DB_HOST
+      - WORDPRESS_DB_USER
+      - WORDPRESS_DB_PASSWORD
+      - WORDPRESS_DB_NAME
+      - VIRTUAL_HOST
+      - LETSENCRYPT_HOST
+    restart: "always"
+    networks:
+      - net2
+      - common2
+
+networks:
+  net2:
+    external: true
+  common2:
+    internal: true

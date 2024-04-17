@@ -1,0 +1,47 @@
+---
+
+version: "3"
+
+services:
+  hd_db:
+    image: "postgres:13.4-alpine"
+    container_name: "hd_db"
+    volumes:
+      - database:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+    restart: "always"
+    networks:
+      - common2
+
+  hedgedoc:
+    image: "quay.io/hedgedoc/hedgedoc:1.9.9"
+    container_name: "hedgedoc"
+    depends_on:
+      - hd_db
+    volumes:
+      - uploads:/hedgedoc/public/uploads
+    environment:
+      - CMD_DB_URL
+      - CMD_DOMAIN
+      - CMD_URL_ADDPORT
+      - VIRTUAL_HOST
+      - LETSENCRYPT_HOST
+      - CMD_PROTOCOL_USESSL
+    restart: "always"
+    networks:
+      - net2
+      - common2
+    ports:
+      - "3000:3000"
+
+volumes:
+  database:
+  uploads:
+networks:
+  net2:
+    external: true
+  common2:
+    internal: true
