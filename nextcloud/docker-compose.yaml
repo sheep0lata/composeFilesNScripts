@@ -52,9 +52,9 @@ services:
       - nc
     restart: "always"
     environment:
-      - aliasgroup=https://nc.sheepo.fr
-      - VIRTUAL_HOST=cola.sheepo.fr
-      - LETSENCRYPT_HOST=cola.sheepo.fr
+      - aliasgroup
+      - VIRTUAL_HOST
+      - LETSENCRYPT_HOST
       - "extra_params=--o:ssl.enable=false  --o:ssl.termination=true"
     networks:
       - net2
