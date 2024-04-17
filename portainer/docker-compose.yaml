@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  portainer:
+    image: "portainer/portainer-ce:latest"
+    container_name: "portainer"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./portainer_data:/data"
+    ports:
+      - 9443:9443
+      - 8000:8000
+      - 9000:9000
+    environment:
+      - VIRTUAL_HOST=pt.sheepo.fr
+    restart: "always"
+    networks:
+      - net2
+
+networks:
+  net2:
+    external: true
