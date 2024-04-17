@@ -10,7 +10,7 @@ I didn't really have any precise idea of what to do when I started this project,
 Now the compose files uploaded are used by me to test new tools or functionalities.
 
 ## Infrasructure
-Basically this infrastructure is just some services behind a reverse proxy. There isn't mush to say about it but I did a little diagram explaining everything :
+Basically this infrastructure is just some services behind a reverse proxy. There isn't much to say about it but I did a little diagram explaining everything :
 
 ![diagram of the reverse proxy](./infra.png "reverse proxy diagram")
 
